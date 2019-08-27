@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script src="./main.js"></script>
+  <script>
+
+    function myfn(a) {
+      if (a) { return 'aaa'; }
+      else { return 'bbb'; }
+    }
+
+    function cb(b) {
+      if (b) { return 'ccc'; }
+      else { throw new Error(); }
+    }
+
+    let config2 = {
+      error: {
+        default: 'eee',
+        execute: () => myfn(),
+        provideErr: false,
+        report: 'warn'
+      },
+      finally: {
+        // default: 'ddd',
+        // execute: () => myfn()
+      }
+    };
+
+    let s = new Detector();
+
+    let myVar = s.watch(() => cb(), config2);
+    console.log(myVar);
+
+    myVar = s.watch(() => cb());
+    console.log(myVar);
+
+  </script>
+</body>
+
+</html>

@@ -1,4 +1,4 @@
-class Spectator {
+class Detector {
 
   constructor(x = null) {
     if (x) { this.config = x; }
@@ -6,11 +6,11 @@ class Spectator {
 
   acceptedConsoleMethods = ['error', 'group', 'info', 'log', 'table', 'trace', 'warn'];
   config = null;
-  errorMsg = 'Spectator watch() method contains an invalid config object. Check class instances and individual function calls.'
+  errorMsg = 'Detector watch() method contains an invalid config object. Check class instances and individual function calls.'
 
   // wrapper method that encapsulates a function and provides a user-defined error response handle
   watch(callback, config = this.config) {
-    if (!config) { console.error(this.errorMsg); }
+    if (!config) { return console.error(this.errorMsg); }
     const ce = config.error;
     const cf = config.finally;
     try {
@@ -20,21 +20,18 @@ class Spectator {
       if (ce) {
         if (ce.report && this.acceptedConsoleMethods.includes(ce.report)) { console[ce.report](err); }
         //---
-        let x;
-        if (ce.execute && ce.provideErrArg) {
-          ce.execute.arguments[0] = err; //TODO: fix this functionality
-          x = ce.execute;
+        if (ce.provideErr) { return err; }
+        else if (ce.execute) {
+          const x = ce.execute();
           if (x) { return x; }
         }
-        else if (ce.execute) { x = ce.execute; }
-        //---
-        if (x) { return x; }
         else if (ce.default) { return ce.default; }
       }
     }
     finally {
       if (cf) {
-        const x = cf.execute;
+        let x;
+        if (cf.execute) { x = cf.execute(); }
         if (x) { return x; }
         else if (cf.default) { return cf.default; }
       }
@@ -47,7 +44,7 @@ const config = {
   error: {
     default: null, // return this value if callback doesn't return
     execute: null,
-    provideErrArg: false, // set to true if you want to receive the err as the first argument in your callback.
+    provideErr: false, // set to true if you want to receive the err as the first argument in your callback.
     report: null, // 'error', 'info', 'log', 'warn' -- basically any console method that you want to use to display your error
   },
   finally: {
