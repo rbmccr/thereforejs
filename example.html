@@ -13,6 +13,19 @@
   <script src="./main.js"></script>
   <script>
 
+    const config = {
+      error: {
+        default: null, // return this value if callback doesn't return in error.execute
+        execute: null, // callback (if value is returned from callback, then same value is returned from error block)
+        provideErr: false, // set to true if you want to receive the err as a return value.
+        report: null, // 'error', 'info', 'log', 'warn' -- there are several console methods accepted
+      },
+      finally: {
+        default: null, // return this value if callback doesn't return in finally.execute
+        execute: null, // callback (if value is returned from callback, then same value is returned from finally block)
+      }
+    };
+
     function myfn(a) {
       if (a) { return 'aaa'; }
       else { return 'bbb'; }
@@ -36,7 +49,7 @@
       }
     };
 
-    let s = new Detector();
+    let s = new Snatcher();
 
     let myVar = s.watch(() => cb(), config2);
     console.log(myVar);
