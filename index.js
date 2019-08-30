@@ -6,32 +6,39 @@ class Snatcher {
 
   acceptedConsoleMethods = ['error', 'group', 'info', 'log', 'table', 'trace', 'warn'];
   config = null;
-  errorMsg = 'Snatcher watch() method contains an invalid config object. Check class instances and individual function calls.'
+  errorMsg = 'Snatcher method contains an invalid config object. Check class instances and individual function calls.'
 
   watch(callback, config = this.config) {
     if (!config) { return console.error(this.errorMsg); }
-    const ce = config.error;
+    const ct = config.try;
+    const cc = config.catch;
     const cf = config.finally;
     try {
-      callback();
+      let x;
+      x = callback();
+      if (x) { return x; }
+      else if (ct) {
+        if (ct.execute) { x = ct.execute(); }
+        if (x) { return x; }
+        else if (ct.default) { return ct.default; }
+      }
     }
     catch (err) {
-      if (ce) {
-        if (ce.report && this.acceptedConsoleMethods.includes(ce.report)) { console[ce.report](err); }
-        //---
-        else if (ce.execute) {
-          const x = ce.execute();
-          if (x) { return x; }
+      if (cc) {
+        if (cc.report && this.acceptedConsoleMethods.includes(cc.report)) { console[cc.report](err); }
+        if (cc.execute) {
+          const y = cc.execute();
+          if (y) { return y; }
         }
-        if (ce.provideErr) { return err; }
-        else if (ce.default) { return ce.default; }
+        if (cc.provideErr) { return err; }
+        else if (cc.default) { return cc.default; }
       }
     }
     finally {
       if (cf) {
-        let x;
-        if (cf.execute) { x = cf.execute(); }
-        if (x) { return x; }
+        let z;
+        if (cf.execute) { z = cf.execute(); }
+        if (z) { return z; }
         else if (cf.default) { return cf.default; }
       }
     }

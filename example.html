@@ -10,11 +10,15 @@
 
 <body>
 
-  <script src="./main.js"></script>
+  <script src="./index.js"></script>
   <script>
 
     const config = {
-      error: {
+      try: {
+        default: null,
+        execute: null,
+      },
+      catch: {
         default: null, // return this value if callback doesn't return in error.execute
         execute: null, // callback (if value is returned from callback, then same value is returned from error block)
         provideErr: false, // set to true if you want to receive the err as a return value.
@@ -32,20 +36,24 @@
     }
 
     function cb(b) {
-      if (b) { return 'ccc'; }
+      if (b) {  }
       else { throw new Error(); }
     }
 
     let config2 = {
-      error: {
+      try: {
+        default: 'val',
+        // execute: () => myfn('a')
+      },
+      catch: {
         default: 'eee',
-        execute: () => myfn(),
-        provideErr: false,
+        // execute: () => myfn(),
+        // provideErr: true,
         report: 'warn'
       },
       finally: {
-        // default: 'ddd',
-        // execute: () => myfn()
+        default: 'ddd',
+        execute: () => myfn()
       }
     };
 
