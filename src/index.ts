@@ -1,14 +1,37 @@
+interface Try {
+  default: any,
+  execute: Function,
+}
+
+interface Catch {
+  default: any,
+  execute: Function,
+  provideErr: boolean,
+  report: string
+}
+
+interface Config {
+  try?: Try
+  catch?: Catch
+  finally?: Finally
+}
+
+interface Finally {
+  default: any,
+  execute: Function,
+}
+
 class Snatcher {
 
-  constructor(x = null) {
-    if (x) { this.config = x; }
+  constructor(x?: Config) {
+    this.config = x ? x : null;
   }
 
-  acceptedConsoleMethods = ['error', 'group', 'info', 'log', 'table', 'trace', 'warn'];
-  config = null;
-  errorMsg = 'Snatcher method contains an invalid config object. Check class instances and individual function calls.'
+  private acceptedConsoleMethods: string[] = ['error', 'group', 'info', 'log', 'table', 'trace', 'warn'];
+  private config: Config;
+  private errorMsg: string = 'Snatcher method contains an invalid config object. Check class instances and individual function calls.'
 
-  watch(callback, config = this.config) {
+  watch(callback: Function, config: Config = this.config) {
     if (!config) { return console.error(this.errorMsg); }
     const ct = config.try;
     const cc = config.catch;
@@ -45,3 +68,5 @@ class Snatcher {
   }
 
 }
+
+export default Snatcher;

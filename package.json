@@ -4,7 +4,8 @@
   "description": "A JavaScript library focused on lightweight error handling.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rollup -c"
   },
   "repository": {
     "type": "git",
@@ -23,5 +24,9 @@
   "bugs": {
     "url": "https://github.com/rbmccr/snatcherjs/issues"
   },
-  "homepage": "https://github.com/rbmccr/snatcherjs#readme"
+  "homepage": "https://github.com/rbmccr/snatcherjs#readme",
+  "devDependencies": {
+    "tslib": "^1.10.0",
+    "typescript": "^3.6.3"
+  }
 }

@@ -62,9 +62,12 @@
     let myVar = s.watch(() => cb(), config2);
     console.log(myVar);
 
-    myVar = s.watch(() => cb());
-    console.log(myVar);
+    // myVar = s.watch(() => cb());
+    // console.log(myVar);
 
+
+    let sn = new Snatcher()
+    console.log(sn.watch(() => new Error, {error: {default: 'ggg'}}))
   </script>
 </body>
 
