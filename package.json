@@ -4,6 +4,7 @@
   "description": "A JavaScript library focused on lightweight error handling.",
   "main": "index.js",
   "scripts": {
+    "start": "yarn docz dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,5 +24,10 @@
   "bugs": {
     "url": "https://github.com/rbmccr/snatcherjs/issues"
   },
-  "homepage": "https://github.com/rbmccr/snatcherjs#readme"
+  "homepage": "https://github.com/rbmccr/snatcherjs#readme",
+  "devDependencies": {
+    "docz": "^2.0.0-rc.42",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
+  }
 }
