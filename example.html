@@ -22,7 +22,7 @@
         default: null, // return this value if callback doesn't return in error.execute
         execute: null, // callback (if value is returned from callback, then same value is returned from error block)
         provideErr: false, // set to true if you want to receive the err as a return value.
-        report: null, // 'error', 'info', 'log', 'warn' -- there are several console methods accepted
+        logType: null, // 'error', 'info', 'log', 'warn' -- there are several console methods accepted
       },
       finally: {
         default: null, // return this value if callback doesn't return in finally.execute
@@ -49,7 +49,7 @@
         default: 'eee',
         // execute: () => myfn(),
         // provideErr: true,
-        report: 'warn'
+        logType: 'warn'
       },
       finally: {
         default: 'ddd',

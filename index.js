@@ -1,47 +1,67 @@
 class Snatcher {
 
   constructor(x = null) {
-    if (x) { this.config = x; }
+    if (x) this.config = x;
   }
 
   acceptedConsoleMethods = ['error', 'group', 'info', 'log', 'table', 'trace', 'warn'];
   config = null;
-  errorMsg = 'Snatcher method contains an invalid config object. Check class instances and individual function calls.'
+
+  badLogTypeError = 'The logType provided to this Snatcher instance or method config object is not permitted.'
+  configError = 'Snatcher instance or method contains an invalid config object.'
+  supersedeError = 'The callback provided returns a value but it is superseded by a value returned from the finally block.'
 
   watch(callback, config = this.config) {
-    if (!config) { return console.error(this.errorMsg); }
+    if (!config) return this._disclose('error', this.configError);
     const ct = config.try;
     const cc = config.catch;
     const cf = config.finally;
+
+    let intendedReturnVal;
+
     try {
-      let x;
-      x = callback();
-      if (x) { return x; }
-      else if (ct) {
-        if (ct.execute) { x = ct.execute(); }
-        if (x) { return x; }
-        else if (ct.default) { return ct.default; }
-      }
+      intendedReturnVal = ct ? this._try(callback, ct) : callback();
+      return intendedReturnVal;
     }
     catch (err) {
-      if (cc) {
-        if (cc.report && this.acceptedConsoleMethods.includes(cc.report)) { console[cc.report](err); }
-        if (cc.execute) {
-          const y = cc.execute();
-          if (y) { return y; }
-        }
-        if (cc.provideErr) { return err; }
-        else if (cc.default) { return cc.default; }
-      }
+      if (cc) return this._catch(cc, err)
     }
     finally {
-      if (cf) {
-        let z;
-        if (cf.execute) { z = cf.execute(); }
-        if (z) { return z; }
-        else if (cf.default) { return cf.default; }
-      }
+      if (cf) return this._finally(cf)
     }
+  }
+
+  _catch (cc) {
+    if (cc.logType && this.acceptedConsoleMethods.includes(cc.logType)) { this._disclose(cc.logType, err); }
+    else if (cc.logType) { this._disclose('error', this.badLogTypeError) }
+
+    let y;
+    if (cc.execute) y = cc.execute();
+    if (y) return y;
+    if (cc.provideErr) return err;
+    if (cc.default) return cc.default;
+  }
+
+  _disclose (logType, msg) {
+    if (config.silence) return;
+    console[logType](msg);
+  }
+
+  _finally (cf) {
+    let x;
+    if (cf.execute) x = cf.execute();
+    if (x || cf.default && intendedReturnVal) this._disclose('warn', this.supersedeError)
+    if (x) return x;
+    if (cf.default) return cf.default;
+  }
+
+  _try (callback, ct) {
+    let x;
+    x = callback();
+    if (x) return x;
+    if (ct.execute) x = ct.execute();
+    if (x) return x;
+    if (ct.default) return ct.default;
   }
 
 }
