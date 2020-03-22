@@ -1,19 +1,19 @@
 {
-  "name": "snatcher",
+  "name": "therefore",
   "version": "1.0.0",
   "description": "A JavaScript library intended for lightweight and controlled error handling.",
   "main": "build/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel snatcher.js --out-file build/index.js --source-maps"
+    "build": "babel therefore.js --out-file build/index.js --source-maps"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rbmccr/snatchlerjs.git"
   },
   "keywords": [
-    "snatcher",
-    "snatcherjs",
+    "therefore",
+    "thereforejs",
     "error",
     "try",
     "catch",
@@ -22,9 +22,9 @@
   "author": "Brendan McCray",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rbmccr/snatcherjs/issues"
+    "url": "https://github.com/rbmccr/thereforejs/issues"
   },
-  "homepage": "https://github.com/rbmccr/snatcherjs#readme",
+  "homepage": "https://github.com/rbmccr/thereforejs#readme",
   "devDependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.9.0",

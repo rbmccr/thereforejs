@@ -1,4 +1,4 @@
-class Snatcher {
+class IAm {
 
   constructor(x = {}) {
     this.config = x;
@@ -8,11 +8,11 @@ class Snatcher {
   acceptedConsoleMethods = ['error', 'group', 'info', 'log', 'table', 'trace', 'warn'];
 
   // console outputs
-  badLogTypeError = '[Snatcher] The logType provided is not permitted.'
-  configError = '[Snatcher] Invalid config object.'
-  supersedeError = '[Snatcher] Function provided returns a truthy value but it is superseded by a value returned from the finally block.'
+  badLogTypeError = '[IAm] The logType provided is not permitted.'
+  configError = '[IAm] Invalid config object.'
+  supersedeError = '[IAm] Callback provided returns a truthy value but it is superseded by a value returned from the finally block.'
 
-  watch(callback, config = this.config) {
+  watching(callback, config = this.config) {
     if (!this._configIsValid(config)) return this._disclose(config, 'error', this.configError);
     const ct = config.try;
     const cc = config.catch;
@@ -82,4 +82,4 @@ class Snatcher {
 
 }
 
-export default Snatcher;
+export default IAm;
