@@ -19,7 +19,7 @@
     "catch",
     "finally"
   ],
-  "author": "Brendan McCray",
+  "author": "Brendan McCray and Graham Scates",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/rbmccr/thereforejs/issues"
