@@ -1,6 +1,6 @@
 {
   "name": "therefore",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A JavaScript library intended for lightweight and controlled error handling.",
   "main": "build/index.js",
   "scripts": {
