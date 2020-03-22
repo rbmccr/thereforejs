@@ -1,6 +1,6 @@
 {
   "name": "therefore",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A JavaScript library intended for lightweight and controlled error handling.",
   "main": "build/index.js",
   "scripts": {
@@ -30,10 +30,9 @@
     "@babel/core": "^7.9.0",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/plugin-transform-classes": "^7.9.2",
+    "@babel/polyfill": "^7.8.7",
     "@babel/preset-env": "^7.9.0",
     "babel-preset-minify": "^0.5.1"
   },
-  "dependencies": {
-    "@babel/polyfill": "^7.8.7"
-  }
+  "dependencies": {}
 }
