@@ -10,11 +10,14 @@ A small and easy-to-integrate JavaScript library for managing errors.
 
 ### Setup
 
+- Import the class
 - Instantiate the class
 - Prepare a config object
 - Wrap your function call in an IAm method
 
 ```
+import IAm from "therefore";
+
 let iam = new IAm();
 
 let config = {
