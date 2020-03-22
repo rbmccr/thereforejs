@@ -17,11 +17,11 @@ class Snatcher {
     const cc = config.catch;
     const cf = config.finally;
 
-    let intendedReturnVal;
+    let callbackReturnVal;
 
     try {
-      intendedReturnVal = ct ? this._try(callback, ct) : callback();
-      return intendedReturnVal;
+      callbackReturnVal = ct ? this._try(callback, ct) : callback();
+      return callbackReturnVal;
     }
     catch (err) {
       if (cc) return this._catch(cc, err)
@@ -50,7 +50,7 @@ class Snatcher {
   _finally (cf) {
     let x;
     if (cf.execute) x = cf.execute();
-    if (x || cf.default && intendedReturnVal) this._disclose('warn', this.supersedeError)
+    if (x || cf.default && callbackReturnVal) this._disclose('warn', this.supersedeError)
     if (x) return x;
     if (cf.default) return cf.default;
   }

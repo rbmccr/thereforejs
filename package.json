@@ -1,7 +1,7 @@
 {
   "name": "snatcherjs",
   "version": "1.0.0",
-  "description": "A JavaScript library focused on lightweight error handling.",
+  "description": "A JavaScript library intended for lightweight and controlled error handling.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -19,7 +19,7 @@
     "finally"
   ],
   "author": "Brendan McCray",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/rbmccr/snatcherjs/issues"
   },
