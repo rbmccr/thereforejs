@@ -31,9 +31,9 @@ function thisDoesSomething () {
 ```
 
 ### Available Methods
-- `watch()`: Provides a try/catch/finally block. Accepts a function definition and a config object as arguments.
+- `watch()`: Provides a try/catch/finally block. Accepts a callback function and a config object as arguments.
 
-You can pass a config in as a global config during the Snatcher class instantiation or just provide a config each time you wrap a function. All of these properties in the config object below are optional.
+You can pass a config in as a global config during the Snatcher class instantiation or just provide a config each time you wrap a callback. All of these properties in the config object below are optional.
 ```
 let config = {
   try: {
@@ -58,7 +58,7 @@ Here's the order in which a value is returned from a call to `watch()`:
 ```
 1. value returned from finally: execute
 2. finally: default
-3. [if no error] value returned from the function argument provided to watch()
+3. [if no error] value returned from the callback argument provided to watch()
 4. [if no error] value returned from try: execute
 5. [if no error] try: default
 6. value returned from catch: execute
