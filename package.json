@@ -1,14 +1,15 @@
 {
-  "name": "snatcherjs",
+  "name": "snatcher",
   "version": "1.0.0",
   "description": "A JavaScript library intended for lightweight and controlled error handling.",
-  "main": "index.js",
+  "main": "build/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel snatcher.js --out-file build/index.js --source-maps"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rbmccr/snatcherjs.git"
+    "url": "git+https://github.com/rbmccr/snatchlerjs.git"
   },
   "keywords": [
     "snatcher",
@@ -23,5 +24,16 @@
   "bugs": {
     "url": "https://github.com/rbmccr/snatcherjs/issues"
   },
-  "homepage": "https://github.com/rbmccr/snatcherjs#readme"
+  "homepage": "https://github.com/rbmccr/snatcherjs#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-transform-classes": "^7.9.2",
+    "@babel/preset-env": "^7.9.0",
+    "babel-preset-minify": "^0.5.1"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.8.7"
+  }
 }
